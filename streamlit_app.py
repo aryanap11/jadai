@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
 from dotenv import load_dotenv
 from fpdf import FPDF
 import os
@@ -42,8 +41,21 @@ def generate_pdf(text):
     pdf_bytes = pdf.output(dest='S').encode('latin1')
     return pdf_bytes
 
+# Function to style the sidebar
+def set_sidebar_style():
+    st.markdown(
+        """
+        <style>
+        .sidebar .sidebar-content {
+            background-color: #f0f2f6;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-def show_about_us():
+# Function for the "About Us" page
+def about_us():
     st.title("About Us ℹ️")
     st.write("At JAD AI, we're passionate about making travel planning easy and enjoyable for everyone. "
              "Our team of experienced professionals is dedicated to providing innovative solutions "
@@ -90,11 +102,8 @@ def show_about_us():
     st.write("Follow us on social media to stay updated:")
 
     social_media = [
-        {"platform": "Twitter", "handle": " @jad", "icon": "twitter.svg"},
-        {"platform": "Instagram", "handle": " @jad", "icon": "instagram.svg"},
-        {"platform": "Facebook", "handle": " JAD AI", "icon": "facebook.svg"},
-        {"platform": "Gmail", "handle": " jadai.travel@gmail.com", "icon": "envelope-at-fill.svg"},
-
+        {"platform": "Instagram", "handle": " @jadai.travel", "icon": "instagram.png"},
+        {"platform": "Gmail", "handle": " jadai.travel@gmail.com", "icon": "email.png"},
     ]
 
     col1, col2 = st.columns([1,15])
@@ -126,9 +135,8 @@ def show_about_us():
             st.write(f"\"{testimonial['review']}\"")
             st.write("---")
 
-
-
-def show_plan_new_trip():
+# Function for the "Plan New Trip" page
+def plan_new_trip():
     st.title("Plan New Trip 🗺️")
     destination = st.text_input("Destination:", "")
     from_date = st.date_input("From Date:")
@@ -153,9 +161,8 @@ def show_plan_new_trip():
             pdf_bytes = generate_pdf(response)
             st.download_button(label="Download PDF", data=pdf_bytes, file_name='trip_itinerary.pdf', mime='application/pdf')
 
-
-
-def show_feedback():
+# Function for the "Feedback" page
+def feedback():
     st.title("Feedback 📝")
     st.write("Please provide your feedback using the form below:")
     # Embed Google Form using Markdown
@@ -222,19 +229,24 @@ def show_feedback():
     )
 
 
-def main():
-    with st.sidebar:
-        selected_page = option_menu("Navigation", [ "About Us","Plan New Trip","Feedback"],
-                                    icons=[ 'info-circle','map', 'chat-left-text'],
-                                    menu_icon="cast", default_index=1,orientation="vertical")
-        selected_page
-    if selected_page == "Plan New Trip":
-        show_plan_new_trip()
-    elif selected_page == "About Us":
-        show_about_us()
-    elif selected_page == "Feedback":
-        show_feedback()
+# Function for the "Home" page
+def home():
+    st.title("Home 🏠")
+    st.write("Welcome to the home page. Add your content here.")
 
+# Set sidebar style
+set_sidebar_style()
 
-if __name__ == "__main__":
-    main()
+# Sidebar navigation
+page = st.sidebar.radio("Navigation", ["About Us", "Plan New Trip", "Feedback", "Home"])
+
+# Page selection based on sidebar navigation
+if page == "About Us":
+    about_us()
+elif page == "Plan New Trip":
+    plan_new_trip()
+elif page == "Feedback":
+    feedback()
+elif page == "Home":
+    home()
+    
