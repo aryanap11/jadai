@@ -90,10 +90,8 @@ def show_about_us():
     st.write("Follow us on social media to stay updated:")
 
     social_media = [
-        {"platform": "Twitter", "handle": " @jad", "icon": "twitter.svg"},
-        {"platform": "Instagram", "handle": " @jad", "icon": "instagram.svg"},
-        {"platform": "Facebook", "handle": " JAD AI", "icon": "facebook.svg"},
-        {"platform": "Gmail", "handle": " jadai.travel@gmail.com", "icon": "envelope-at-fill.svg"},
+        {"platform": "Instagram", "handle": " @jadai.travel", "icon": "instagram.png"},
+        {"platform": "Gmail", "handle": " jadai.travel@gmail.com", "icon": "email.png"},
 
     ]
 
