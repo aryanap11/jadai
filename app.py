@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from fpdf import FPDF
 import os
 import google.generativeai as genai
-from io import BytesIO
 
 # Load environment variables
 load_dotenv()
