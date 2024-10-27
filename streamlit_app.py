@@ -153,7 +153,7 @@ def feedback():
 set_sidebar_style()
 
 # Sidebar navigation
-page = st.sidebar.radio("Navigation", ["About Us", "Plan New Trip", "Feedback", "Home"])
+page = st.sidebar.radio("Navigation", [ "Plan New Trip", "Feedback"])
 
 # Page selection based on sidebar navigation
 
